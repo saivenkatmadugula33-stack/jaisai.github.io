@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Madugula Jai Sai Venkat — Quality Analyst & Chatbot Developer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #050a0f;
+    --bg2: #0c1520;
+    --bg3: #111d2b;
+    --card: #0f1e2e;
+    --border: rgba(0,200,150,0.12);
+    --border2: rgba(0,200,150,0.25);
+    --accent: #00c896;
+    --accent2: #00a3f5;
+    --accent3: #7c3aed;
+    --text: #e8f4f0;
+    --muted: #7a9dbb;
+    --subtle: #3a5a72;
+    --white: #ffffff;
+    --grad1: linear-gradient(135deg,#00c896,#00a3f5);
+    --grad2: linear-gradient(135deg,#7c3aed,#00a3f5);
+    --font-head: 'Syne', sans-serif;
+    --font-body: 'DM Sans', sans-serif;
+    --radius: 16px;
+    --radius-sm: 10px;
+  }
+  [data-theme="light"] {
+    --bg: #f0f6f3;
+    --bg2: #e4efe9;
+    --bg3: #d8e8e0;
+    --card: #ffffff;
+    --border: rgba(0,150,100,0.15);
+    --border2: rgba(0,150,100,0.3);
+    --text: #0a1a12;
+    --muted: #3a6050;
+    --subtle: #7ab09a;
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth;font-size:16px}
+  body{background:var(--bg);color:var(--text);font-family:var(--font-body);font-weight:400;line-height:1.7;overflow-x:hidden;transition:background .4s,color .4s}
+
+  /* ── SCROLLBAR ── */
+  ::-webkit-scrollbar{width:4px}
+  ::-webkit-scrollbar-track{background:var(--bg)}
+  ::-webkit-scrollbar-thumb{background:var(--accent);border-radius:4px}
+
+  /* ── SELECTION ── */
+  ::selection{background:rgba(0,200,150,0.25);color:var(--text)}
+
+  /* ── NAVBAR ── */
+  nav{
+    position:fixed;top:0;left:0;right:0;z-index:999;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:1rem 4%;
+    background:rgba(5,10,15,0.85);
+    backdrop-filter:blur(20px);
+    border-bottom:1px solid var(--border);
+    transition:background .4s;
+  }
+  [data-theme="light"] nav{background:rgba(240,246,243,0.9)}
+  .nav-logo{
+    font-family:var(--font-head);font-size:1.15rem;font-weight:800;
+    background:var(--grad1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;
+    letter-spacing:-0.5px;
+  }
+  .nav-links{display:flex;gap:2rem;list-style:none;align-items:center}
+  .nav-links a{color:var(--muted);text-decoration:none;font-size:.875rem;font-weight:400;letter-spacing:.3px;transition:color .25s;position:relative}
+  .nav-links a::after{content:'';position:absolute;bottom:-3px;left:0;width:0;height:1px;background:var(--accent);transition:width .3s}
+  .nav-links a:hover{color:var(--accent)}
+  .nav-links a:hover::after{width:100%}
+  .nav-right{display:flex;align-items:center;gap:1rem}
+  #themeBtn{
+    background:none;border:1px solid var(--border2);color:var(--muted);
+    width:38px;height:38px;border-radius:50%;cursor:pointer;font-size:1rem;
+    display:flex;align-items:center;justify-content:center;
+    transition:all .3s;
+  }
+  #themeBtn:hover{border-color:var(--accent);color:var(--accent);transform:rotate(20deg)}
+  .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px}
+  .hamburger span{display:block;width:22px;height:2px;background:var(--muted);transition:.3s;border-radius:2px}
+
+  /* ── HERO ── */
+  #hero{
+    min-height:100vh;
+    display:flex;align-items:center;
+    padding:7rem 4% 4rem;
+    position:relative;overflow:hidden;
+  }
+  .hero-bg{
+    position:absolute;inset:0;pointer-events:none;
+    background:
+      radial-gradient(ellipse 70% 60% at 70% 40%, rgba(0,200,150,0.06) 0%, transparent 70%),
+      radial-gradient(ellipse 50% 50% at 20% 80%, rgba(0,163,245,0.05) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 40% at 90% 90%, rgba(124,58,237,0.05) 0%, transparent 60%);
+  }
+  .hero-grid{
+    display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;
+    max-width:1200px;margin:0 auto;width:100%;
+  }
+  .hero-badge{
+    display:inline-flex;align-items:center;gap:.5rem;
+    background:rgba(0,200,150,0.08);border:1px solid rgba(0,200,150,0.2);
+    color:var(--accent);font-size:.75rem;font-weight:500;letter-spacing:.8px;text-transform:uppercase;
+    padding:.35rem .9rem;border-radius:100px;margin-bottom:1.5rem;
+  }
+  .hero-badge span{width:6px;height:6px;background:var(--accent);border-radius:50%;animation:pulse 2s infinite}
+  @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.8)}}
+  .hero-name{
+    font-family:var(--font-head);font-size:clamp(2.2rem,5vw,3.8rem);font-weight:800;
+    line-height:1.1;letter-spacing:-1.5px;margin-bottom:.75rem;
+  }
+  .hero-name .line2{
+    background:var(--grad1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  }
+  .hero-role{
+    font-family:var(--font-head);font-size:1.1rem;font-weight:500;color:var(--muted);
+    margin-bottom:1.5rem;letter-spacing:.2px;
+  }
+  .hero-bio{
+    font-size:.95rem;color:var(--muted);max-width:460px;line-height:1.8;margin-bottom:2rem;
+  }
+  .hero-ctas{display:flex;gap:1rem;flex-wrap:wrap}
+  .btn-primary{
+    display:inline-flex;align-items:center;gap:.5rem;
+    background:var(--grad1);color:#050a0f;
+    padding:.7rem 1.6rem;border-radius:100px;
+    font-weight:600;font-size:.875rem;text-decoration:none;border:none;cursor:pointer;
+    transition:transform .2s,box-shadow .2s;letter-spacing:.2px;
+  }
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,200,150,0.25)}
+  .btn-outline{
+    display:inline-flex;align-items:center;gap:.5rem;
+    background:transparent;color:var(--text);
+    padding:.7rem 1.6rem;border-radius:100px;border:1px solid var(--border2);
+    font-weight:400;font-size:.875rem;text-decoration:none;cursor:pointer;
+    transition:all .2s;
+  }
+  .btn-outline:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-2px)}
+  .hero-stats{
+    display:flex;gap:2.5rem;margin-top:2.5rem;padding-top:2rem;
+    border-top:1px solid var(--border);
+  }
+  .stat-item{}
+  .stat-num{font-family:var(--font-head);font-size:1.8rem;font-weight:800;color:var(--accent)}
+  .stat-label{font-size:.75rem;color:var(--muted);text-transform:uppercase;letter-spacing:.8px}
+
+  /* HERO VISUAL */
+  .hero-visual{
+    display:flex;justify-content:center;align-items:center;position:relative;
+  }
+  .avatar-ring{
+    width:320px;height:320px;border-radius:50%;
+    border:1px solid var(--border2);
+    display:flex;align-items:center;justify-content:center;
+    position:relative;animation:spinSlow 20s linear infinite;
+  }
+  @keyframes spinSlow{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+  .avatar-ring::before{
+    content:'';position:absolute;inset:-20px;border-radius:50%;
+    border:1px dashed rgba(0,200,150,0.1);
+  }
+  .avatar-inner{
+    width:240px;height:240px;border-radius:50%;
+    background:var(--grad1);
+    display:flex;align-items:center;justify-content:center;
+    font-family:var(--font-head);font-size:5rem;font-weight:800;
+    color:#050a0f;
+    animation:spinSlow 20s linear infinite reverse;
+    position:relative;overflow:hidden;
+  }
+  .avatar-inner::after{
+    content:'';position:absolute;inset:0;
+    background:radial-gradient(circle at 30% 30%,rgba(255,255,255,0.25),transparent 60%);
+  }
+  .orbit-dot{
+    position:absolute;width:10px;height:10px;border-radius:50%;
+    background:var(--accent);
+  }
+  .orbit-dot:nth-child(2){top:10px;left:50%;transform:translateX(-50%)}
+  .orbit-dot:nth-child(3){bottom:10px;left:50%;transform:translateX(-50%);background:var(--accent2)}
+  .orbit-dot:nth-child(4){left:10px;top:50%;transform:translateY(-50%);background:var(--accent3)}
+  .orbit-dot:nth-child(5){right:10px;top:50%;transform:translateY(-50%)}
+  .float-card{
+    position:absolute;
+    background:var(--card);border:1px solid var(--border);
+    padding:.7rem 1rem;border-radius:var(--radius-sm);
+    backdrop-filter:blur(10px);
+    display:flex;align-items:center;gap:.6rem;
+    font-size:.8rem;font-weight:500;
+    animation:floatY 4s ease-in-out infinite;
+    white-space:nowrap;
+  }
+  .float-card:nth-of-type(1){top:5%;right:-30px;animation-delay:0s}
+  .float-card:nth-of-type(2){bottom:10%;right:-20px;animation-delay:1.5s}
+  .float-card:nth-of-type(3){bottom:30%;left:-30px;animation-delay:.8s}
+  @keyframes floatY{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+  .fc-dot{width:8px;height:8px;border-radius:50%;background:var(--accent)}
+  .fc-dot.blue{background:var(--accent2)}
+  .fc-dot.purple{background:var(--accent3)}
+
+  /* ── SECTION BASE ── */
+  section{padding:6rem 4%;position:relative}
+  .container{max-width:1200px;margin:0 auto}
+  .section-label{
+    display:inline-flex;align-items:center;gap:.5rem;
+    font-size:.7rem;font-weight:600;text-transform:uppercase;letter-spacing:2px;
+    color:var(--accent);margin-bottom:1rem;
+  }
+  .section-label::before{content:'';width:24px;height:1px;background:var(--accent)}
+  .section-title{
+    font-family:var(--font-head);font-size:clamp(1.8rem,4vw,2.8rem);font-weight:800;
+    line-height:1.15;letter-spacing:-1px;margin-bottom:1rem;
+  }
+  .section-sub{color:var(--muted);max-width:520px;font-size:.95rem;margin-bottom:3rem;line-height:1.8}
+
+  /* ── ABOUT ── */
+  #about{background:var(--bg2)}
+  .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start}
+  .about-text p{color:var(--muted);font-size:.95rem;line-height:1.9;margin-bottom:1.2rem}
+  .about-details{display:flex;flex-direction:column;gap:1rem;margin-top:1.5rem}
+  .detail-row{display:flex;align-items:center;gap:.75rem;font-size:.875rem;color:var(--muted)}
+  .detail-row svg{flex-shrink:0;color:var(--accent)}
+  .detail-row a{color:var(--accent2);text-decoration:none}
+  .detail-row a:hover{text-decoration:underline}
+  .skills-cloud{
+    background:var(--card);border:1px solid var(--border);
+    border-radius:var(--radius);padding:2rem;
+  }
+  .skills-title{font-family:var(--font-head);font-size:1rem;font-weight:700;margin-bottom:1.5rem;color:var(--text)}
+  .skill-tags{display:flex;flex-wrap:wrap;gap:.6rem}
+  .skill-tag{
+    padding:.35rem .9rem;border-radius:100px;font-size:.8rem;font-weight:500;
+    border:1px solid;
+    transition:transform .2s,box-shadow .2s;cursor:default;
+  }
+  .skill-tag:hover{transform:translateY(-2px)}
+  .skill-tag.green{background:rgba(0,200,150,0.08);border-color:rgba(0,200,150,0.25);color:var(--accent)}
+  .skill-tag.blue{background:rgba(0,163,245,0.08);border-color:rgba(0,163,245,0.25);color:var(--accent2)}
+  .skill-tag.purple{background:rgba(124,58,237,0.08);border-color:rgba(124,58,237,0.25);color:#a78bfa}
+
+  /* ── EXPERIENCE ── */
+  #experience{background:var(--bg)}
+  .timeline{position:relative;padding-left:2rem}
+  .timeline::before{
+    content:'';position:absolute;left:0;top:8px;bottom:8px;
+    width:1px;background:linear-gradient(to bottom,var(--accent),transparent);
+  }
+  .timeline-item{position:relative;margin-bottom:3rem;opacity:0;transform:translateX(-20px);transition:.6s}
+  .timeline-item.visible{opacity:1;transform:translateX(0)}
+  .tl-dot{
+    position:absolute;left:-2.45rem;top:6px;
+    width:12px;height:12px;border-radius:50%;
+    background:var(--accent);
+    box-shadow:0 0 0 3px var(--bg),0 0 0 5px rgba(0,200,150,0.2);
+  }
+  .tl-date{font-size:.75rem;text-transform:uppercase;letter-spacing:1px;color:var(--accent);margin-bottom:.4rem;font-weight:600}
+  .tl-role{font-family:var(--font-head);font-size:1.2rem;font-weight:700;margin-bottom:.2rem}
+  .tl-company{
+    display:inline-flex;align-items:center;gap:.4rem;
+    color:var(--muted);font-size:.875rem;margin-bottom:.8rem;
+  }
+  .tl-desc{color:var(--muted);font-size:.9rem;line-height:1.8}
+
+  /* ── PROJECTS ── */
+  #projects{background:var(--bg2)}
+  .projects-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:3rem;flex-wrap:wrap;gap:1rem}
+  #projects-grid{
+    display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:1.5rem;
+  }
+  .project-card{
+    background:var(--card);border:1px solid var(--border);
+    border-radius:var(--radius);padding:1.8rem;
+    display:flex;flex-direction:column;
+    transition:border-color .3s,transform .3s,box-shadow .3s;
+    opacity:0;transform:translateY(20px);
+    cursor:pointer;text-decoration:none;color:inherit;
+  }
+  .project-card.visible{opacity:1;transform:translateY(0)}
+  .project-card:hover{
+    border-color:var(--border2);
+    transform:translateY(-4px);
+    box-shadow:0 12px 40px rgba(0,200,150,0.08);
+  }
+  .card-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:1.2rem}
+  .repo-icon{
+    width:40px;height:40px;border-radius:10px;
+    background:rgba(0,200,150,0.1);border:1px solid rgba(0,200,150,0.15);
+    display:flex;align-items:center;justify-content:center;
+  }
+  .card-links{display:flex;gap:.5rem}
+  .card-link{
+    width:32px;height:32px;border-radius:8px;
+    background:transparent;border:1px solid var(--border);
+    display:flex;align-items:center;justify-content:center;
+    color:var(--muted);text-decoration:none;
+    transition:all .2s;
+  }
+  .card-link:hover{border-color:var(--accent);color:var(--accent)}
+  .project-name{font-family:var(--font-head);font-size:1rem;font-weight:700;margin-bottom:.5rem}
+  .project-desc{font-size:.85rem;color:var(--muted);line-height:1.7;margin-bottom:1.2rem;flex:1}
+  .card-footer{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.5rem}
+  .lang-badge{
+    display:inline-flex;align-items:center;gap:.4rem;
+    font-size:.75rem;color:var(--muted);
+  }
+  .lang-dot{width:8px;height:8px;border-radius:50%;background:var(--accent)}
+  .stars{display:flex;align-items:center;gap:.3rem;font-size:.75rem;color:var(--muted)}
+
+  #projects-loading{
+    text-align:center;padding:4rem;color:var(--muted);
+    display:flex;flex-direction:column;align-items:center;gap:1rem;
+  }
+  .loader{
+    width:36px;height:36px;border:2px solid var(--border);
+    border-top-color:var(--accent);border-radius:50%;
+    animation:spin .8s linear infinite;
+  }
+  @keyframes spin{to{transform:rotate(360deg)}}
+  #projects-error{display:none;text-align:center;padding:2rem;color:var(--muted)}
+
+  /* ── EDUCATION ── */
+  #education{background:var(--bg)}
+  .edu-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.5rem}
+  .edu-card{
+    background:var(--card);border:1px solid var(--border);
+    border-radius:var(--radius);padding:1.6rem;
+    position:relative;overflow:hidden;
+    opacity:0;transform:translateY(20px);transition:.5s;
+  }
+  .edu-card.visible{opacity:1;transform:translateY(0)}
+  .edu-card::before{
+    content:'';position:absolute;top:0;left:0;right:0;height:2px;
+    background:var(--grad1);
+  }
+  .edu-icon{
+    width:44px;height:44px;border-radius:12px;
+    background:rgba(0,200,150,0.08);border:1px solid rgba(0,200,150,0.15);
+    display:flex;align-items:center;justify-content:center;
+    margin-bottom:1rem;font-size:1.2rem;
+  }
+  .edu-school{font-family:var(--font-head);font-size:.95rem;font-weight:700;margin-bottom:.3rem}
+  .edu-degree{font-size:.8rem;color:var(--accent);margin-bottom:.4rem;font-weight:500}
+  .edu-period{font-size:.75rem;color:var(--muted);display:flex;align-items:center;gap:.3rem}
+
+  /* ── CONTACT ── */
+  #contact{background:var(--bg2)}
+  .contact-inner{
+    background:var(--card);border:1px solid var(--border);
+    border-radius:var(--radius);padding:3rem;
+    max-width:700px;margin:0 auto;text-align:center;
+    position:relative;overflow:hidden;
+  }
+  .contact-inner::before{
+    content:'';position:absolute;inset:0;
+    background:radial-gradient(ellipse 80% 60% at 50% 0%,rgba(0,200,150,0.04),transparent 70%);
+  }
+  .contact-inner>*{position:relative}
+  .contact-title{font-family:var(--font-head);font-size:2rem;font-weight:800;margin-bottom:.75rem;letter-spacing:-1px}
+  .contact-sub{color:var(--muted);font-size:.95rem;margin-bottom:2rem;line-height:1.8}
+  .contact-links{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+  .contact-link{
+    display:flex;align-items:center;gap:.6rem;
+    padding:.7rem 1.4rem;border-radius:100px;
+    border:1px solid var(--border2);color:var(--text);
+    text-decoration:none;font-size:.875rem;font-weight:500;
+    transition:all .25s;
+  }
+  .contact-link:hover{background:rgba(0,200,150,0.08);border-color:var(--accent);color:var(--accent);transform:translateY(-2px)}
+  .contact-link svg{flex-shrink:0}
+
+  /* ── FOOTER ── */
+  footer{
+    padding:2rem 4%;text-align:center;
+    border-top:1px solid var(--border);
+    color:var(--subtle);font-size:.8rem;
+  }
+  footer span{color:var(--accent)}
+
+  /* ── MOBILE NAV ── */
+  .mobile-menu{
+    display:none;position:fixed;inset:0;background:rgba(5,10,15,0.98);
+    z-index:998;flex-direction:column;align-items:center;justify-content:center;gap:2.5rem;
+    backdrop-filter:blur(20px);
+  }
+  .mobile-menu.open{display:flex}
+  .mobile-menu a{color:var(--text);font-family:var(--font-head);font-size:1.5rem;font-weight:700;text-decoration:none}
+  .mobile-menu a:hover{color:var(--accent)}
+
+  /* ── ANIMATIONS ── */
+  .fade-up{opacity:0;transform:translateY(30px);transition:.7s cubic-bezier(.25,.8,.25,1)}
+  .fade-up.visible{opacity:1;transform:translateY(0)}
+
+  /* ── SCROLL PROGRESS ── */
+  #progress{position:fixed;top:0;left:0;height:2px;background:var(--grad1);z-index:9999;width:0%;transition:width .1s}
+
+  /* ── RESPONSIVE ── */
+  @media(max-width:900px){
+    .hero-grid{grid-template-columns:1fr;text-align:center}
+    .hero-bio{margin:0 auto 2rem}
+    .hero-ctas{justify-content:center}
+    .hero-stats{justify-content:center}
+    .hero-visual{display:none}
+    .about-grid{grid-template-columns:1fr}
+    .nav-links{display:none}
+    .hamburger{display:flex}
+  }
+  @media(max-width:600px){
+    section{padding:4rem 5%}
+    .contact-inner{padding:2rem 1.5rem}
+  }
+</style>
+</head>
+<body>
+
+<div id="progress"></div>
+
+<!-- NAV -->
+<nav id="navbar">
+  <span class="nav-logo">JSV</span>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="nav-right">
+    <button id="themeBtn" aria-label="Toggle theme">☀️</button>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#about" onclick="closeMobile()">About</a>
+  <a href="#experience" onclick="closeMobile()">Experience</a>
+  <a href="#projects" onclick="closeMobile()">Projects</a>
+  <a href="#education" onclick="closeMobile()">Education</a>
+  <a href="#contact" onclick="closeMobile()">Contact</a>
+</div>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid container">
+    <div class="hero-content">
+      <div class="hero-badge"><span></span>Available for Opportunities</div>
+      <h1 class="hero-name">
+        Madugula<br>
+        <span class="line2">Jai Sai Venkat</span>
+      </h1>
+      <p class="hero-role">Quality Analyst &amp; Chatbot Developer</p>
+      <p class="hero-bio">Passionate AI-powered conversational solutions builder using Microsoft Copilot Studio &amp; automation tools. Creating smart, user-friendly applications at the intersection of AI &amp; web development.</p>
+      <div class="hero-ctas">
+        <a href="#projects" class="btn-primary">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 3h6v6M14 10l6.1-6.1M9 21H3v-6M10 14l-6.1 6.1"/></svg>
+          View Projects
+        </a>
+        <a href="#contact" class="btn-outline">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          Get in Touch
+        </a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat-item">
+          <div class="stat-num">1+</div>
+          <div class="stat-label">Year Experience</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">AI</div>
+          <div class="stat-label">Specialist</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">QA</div>
+          <div class="stat-label">Analyst</div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="avatar-ring">
+        <div class="orbit-dot"></div>
+        <div class="orbit-dot"></div>
+        <div class="orbit-dot"></div>
+        <div class="orbit-dot"></div>
+        <div class="avatar-inner">JSV</div>
+      </div>
+      <div class="float-card"><span class="fc-dot"></span>Microsoft Copilot Studio</div>
+      <div class="float-card"><span class="fc-dot blue"></span>Quality Analyst</div>
+      <div class="float-card"><span class="fc-dot purple"></span>AI Developer</div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-text fade-up">
+        <div class="section-label">About Me</div>
+        <h2 class="section-title">Crafting Intelligent<br>Conversations</h2>
+        <p>I am a passionate Chatbot Developer skilled in building AI-powered conversational solutions using Microsoft Copilot Studio and automation tools. I enjoy creating smart, user-friendly applications and continuously learning new technologies in AI and web development.</p>
+        <p>Currently working as a Software Developer at Sri Sai Technologies, I bring a quality-first mindset to every project, ensuring that solutions are not only functional but also reliable and maintainable.</p>
+        <div class="about-details">
+          <div class="detail-row">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Vijayawada, Andhra Pradesh, India
+          </div>
+          <div class="detail-row">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            <a href="mailto:saivenkatmadugula33@gmail.com">saivenkatmadugula33@gmail.com</a>
+          </div>
+          <div class="detail-row">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+            <a href="https://www.linkedin.com/in/madugula-jai-sai-21a008373" target="_blank" rel="noopener">LinkedIn Profile</a>
+          </div>
+          <div class="detail-row">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+            <a href="https://github.com/saivenkatmadugula33-stack/jaisai.github.io" target="_blank" rel="noopener">GitHub Profile</a>
+          </div>
+        </div>
+      </div>
+      <div class="skills-cloud fade-up" style="transition-delay:.15s">
+        <p class="skills-title">Core Skills &amp; Technologies</p>
+        <div class="skill-tags">
+          <span class="skill-tag green">Microsoft Copilot Studio</span>
+          <span class="skill-tag blue">Chatbot Development</span>
+          <span class="skill-tag purple">AI/ML</span>
+          <span class="skill-tag green">Quality Assurance</span>
+          <span class="skill-tag blue">Test Automation</span>
+          <span class="skill-tag green">JavaScript</span>
+          <span class="skill-tag blue">HTML / CSS</span>
+          <span class="skill-tag purple">Power Automate</span>
+          <span class="skill-tag green">Web Development</span>
+          <span class="skill-tag blue">API Testing</span>
+          <span class="skill-tag purple">Azure</span>
+          <span class="skill-tag green">Conversational AI</span>
+          <span class="skill-tag blue">Agile / Scrum</span>
+          <span class="skill-tag purple">NLP</span>
+          <span class="skill-tag green">Git / GitHub</span>
+          <span class="skill-tag blue">Software Testing</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="container">
+    <div class="fade-up">
+      <div class="section-label">Career</div>
+      <h2 class="section-title">Work Experience</h2>
+      <p class="section-sub">Building real-world solutions with a quality-first approach in AI and software development.</p>
+    </div>
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="tl-dot"></div>
+        <div class="tl-date">June 2025 – Present</div>
+        <div class="tl-role">Software Developer</div>
+        <div class="tl-company">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          Sri Sai Technologies
+        </div>
+        <div class="tl-desc">
+          Developing AI-powered conversational applications using Microsoft Copilot Studio and automation tools. 
+          Working on chatbot solutions, quality assurance testing, and building smart user-friendly applications. 
+          Leveraging Power Automate for workflow automation and integrating AI capabilities into enterprise systems.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="container">
+    <div class="projects-header fade-up">
+      <div>
+        <div class="section-label">Work</div>
+        <h2 class="section-title">GitHub Projects</h2>
+        <p class="section-sub" style="margin-bottom:0">Live repositories fetched from GitHub.</p>
+      </div>
+      <a href="https://github.com/saivenkatmadugula33-stack/jaisai.github.io" target="_blank" rel="noopener" class="btn-outline">
+        View All on GitHub
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+      </a>
+    </div>
+    <div id="projects-loading">
+      <div class="loader"></div>
+      <span>Fetching GitHub repositories…</span>
+    </div>
+    <div id="projects-error">
+      <p>Unable to load GitHub projects. <a href="https://github.com/saivenkatmadugula33-stack/jaisai.github.io" target="_blank" style="color:var(--accent2)">View on GitHub →</a></p>
+    </div>
+    <div id="projects-grid"></div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="container">
+    <div class="fade-up">
+      <div class="section-label">Academic Journey</div>
+      <h2 class="section-title">Education</h2>
+      <p class="section-sub">Building a strong foundation across schooling, intermediate, and engineering disciplines.</p>
+    </div>
+    <div class="edu-grid">
+      <div class="edu-card">
+        <div class="edu-icon">🏫</div>
+        <div class="edu-school">Don Bosco Public School</div>
+        <div class="edu-degree">Primary Education</div>
+        <div class="edu-period">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          March 2003 – April 2014 · Vijayawada
+        </div>
+      </div>
+      <div class="edu-card">
+        <div class="edu-icon">📚</div>
+        <div class="edu-school">Bhashyam Educational Institutions</div>
+        <div class="edu-degree">Secondary Education (High School)</div>
+        <div class="edu-period">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          April 2014 – March 2019 · Vijayawada
+        </div>
+      </div>
+      <div class="edu-card">
+        <div class="edu-icon">🎓</div>
+        <div class="edu-school">Sri Chaitanya Junior College</div>
+        <div class="edu-degree">Intermediate (MPC)</div>
+        <div class="edu-period">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          April 2019 – December 2020
+        </div>
+      </div>
+      <div class="edu-card">
+        <div class="edu-icon">⚙️</div>
+        <div class="edu-school">Nimra College of Engineering &amp; Technology</div>
+        <div class="edu-degree">B.Tech – Engineering</div>
+        <div class="edu-period">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          December 2021 – April 2025
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="container">
+    <div class="contact-inner fade-up">
+      <div class="section-label" style="justify-content:center">Contact</div>
+      <h2 class="contact-title">Let's Build Something<br>Together</h2>
+      <p class="contact-sub">Whether you have a project in mind, want to discuss chatbot solutions, or just want to connect — my inbox is always open.</p>
+      <div class="contact-links">
+        <a href="mailto:saivenkatmadugula33@gmail.com" class="contact-link">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          Email Me
+        </a>
+        <a href="https://www.linkedin.com/in/madugula-jai-sai-21a008373" target="_blank" rel="noopener" class="contact-link">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          LinkedIn
+        </a>
+        <a href="https://github.com/saivenkatmadugula33-stack/jaisai.github.io" target="_blank" rel="noopener" class="contact-link">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+          GitHub
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>Designed &amp; built by <span>Madugula Jai Sai Venkat</span> · Vijayawada, India &middot; 2025</p>
+</footer>
+
+<script>
+// ── SCROLL PROGRESS
+window.addEventListener('scroll',()=>{
+  const p=(window.scrollY/(document.body.scrollHeight-window.innerHeight))*100;
+  document.getElementById('progress').style.width=p+'%';
+});
+
+// ── THEME TOGGLE
+const btn=document.getElementById('themeBtn');
+let dark=true;
+btn.addEventListener('click',()=>{
+  dark=!dark;
+  document.documentElement.setAttribute('data-theme',dark?'':'light');
+  btn.textContent=dark?'☀️':'🌙';
+});
+
+// ── HAMBURGER
+const ham=document.getElementById('hamburger');
+const mob=document.getElementById('mobileMenu');
+ham.addEventListener('click',()=>mob.classList.toggle('open'));
+function closeMobile(){mob.classList.remove('open')}
+
+// ── SCROLL ANIMATIONS
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')});
+},{threshold:0.12});
+document.querySelectorAll('.fade-up,.timeline-item,.edu-card,.project-card').forEach(el=>obs.observe(el));
+
+// ── GITHUB REPOS
+const GITHUB_USER='saivenkatmadugula33-stack';
+const LANG_COLORS={JavaScript:'#f1e05a',Python:'#3572A5',HTML:'#e34c26',CSS:'#563d7c',TypeScript:'#2b7489',Jupyter:'#DA5B0B',default:'#00c896'};
+
+async function loadRepos(){
+  const grid=document.getElementById('projects-grid');
+  const loading=document.getElementById('projects-loading');
+  const error=document.getElementById('projects-error');
+  try{
+    const res=await fetch(`https://api.github.com/users/${GITHUB_USER}/repos?sort=updated&per_page=12`);
+    if(!res.ok)throw new Error('GitHub API error');
+    const repos=await res.json();
+    loading.style.display='none';
+    if(!repos.length){
+      error.style.display='block';
+      error.innerHTML='<p>No public repositories found. <a href="https://github.com/saivenkatmadugula33-stack/jaisai.github.io" target="_blank" style="color:var(--accent2)">Visit GitHub →</a></p>';
+      return;
+    }
+    repos.forEach((repo,i)=>{
+      const lc=LANG_COLORS[repo.language]||LANG_COLORS.default;
+      const card=document.createElement('a');
+      card.className='project-card';
+      card.href=repo.html_url;
+      card.target='_blank';
+      card.rel='noopener';
+      card.style.transitionDelay=(i*0.07)+'s';
+      card.innerHTML=`
+        <div class="card-top">
+          <div class="repo-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><path d="M3 3h18v18H3z" rx="2"/><path d="M9 3v18M3 9h6M3 15h6"/></svg>
+          </div>
+          <div class="card-links">
+            <span class="card-link" title="View repo">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+            </span>
+          </div>
+        </div>
+        <div class="project-name">${repo.name}</div>
+        <div class="project-desc">${repo.description||'A GitHub repository by Madugula Jai Sai Venkat.'}</div>
+        <div class="card-footer">
+          <span class="lang-badge">
+            <span class="lang-dot" style="background:${lc}"></span>
+            ${repo.language||'Code'}
+          </span>
+          <span class="stars">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            ${repo.stargazers_count}
+          </span>
+        </div>`;
+      grid.appendChild(card);
+      setTimeout(()=>card.classList.add('visible'),(i*70)+100);
+    });
+  }catch(err){
+    loading.style.display='none';
+    error.style.display='block';
+    // Fallback sample projects from context
+    const fallback=[
+      {name:'jaisai.github.io',desc:'Personal portfolio website built with HTML, CSS & JavaScript.',lang:'HTML',stars:0,url:'https://github.com/saivenkatmadugula33-stack/jaisai.github.io'},
+      {name:'chatbot-solutions',desc:'AI-powered chatbot using Microsoft Copilot Studio for conversational interfaces.',lang:'JavaScript',stars:0,url:'https://github.com/saivenkatmadugula33-stack'},
+      {name:'copilot-studio-bots',desc:'Collection of Copilot Studio automation bots and Power Automate flows.',lang:'JavaScript',stars:0,url:'https://github.com/saivenkatmadugula33-stack'},
+    ];
+    error.style.display='none';
+    fallback.forEach((repo,i)=>{
+      const lc=LANG_COLORS[repo.lang]||LANG_COLORS.default;
+      const card=document.createElement('a');
+      card.className='project-card';
+      card.href=repo.url;
+      card.target='_blank';
+      card.rel='noopener';
+      card.style.transitionDelay=(i*0.07)+'s';
+      card.innerHTML=`
+        <div class="card-top">
+          <div class="repo-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 3v18M15 9H9M15 15H9"/></svg>
+          </div>
+        </div>
+        <div class="project-name">${repo.name}</div>
+        <div class="project-desc">${repo.desc}</div>
+        <div class="card-footer">
+          <span class="lang-badge"><span class="lang-dot" style="background:${lc}"></span>${repo.lang}</span>
+          <span class="stars"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>${repo.stars}</span>
+        </div>`;
+      grid.appendChild(card);
+      setTimeout(()=>card.classList.add('visible'),(i*70)+100);
+    });
+  }
+}
+loadRepos();
+
+// ── NAVBAR SHADOW ON SCROLL
+window.addEventListener('scroll',()=>{
+  const nav=document.getElementById('navbar');
+  nav.style.boxShadow=window.scrollY>40?'0 4px 30px rgba(0,0,0,0.3)':'none';
+});
+</script>
+</body>
+</html>
